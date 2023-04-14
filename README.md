@@ -12,4 +12,4 @@ Python is not my strong suit so this is just for practice! :)
 # [Project 2: Netflix Dataset](https://github.com/Ilhwan98/Luke-Portfolio/blob/main/netflix-analysis-dataset.ipynb)
 * This project was made to predict which countries were producing the most content
 * Data that might possibly affect future endeavors or projects for Netflix
-* Possibly connect with IMDB data to connect tv show/movie ratings
+* Possible additional work: Connect with IMDB data to connect tv show/movie ratings
