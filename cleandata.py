@@ -24,20 +24,20 @@ for files in os.listdir(csv_path):
                 else:
                     df = pd.read_csv(file_path, sep=',', header=7, low_memory=False)
             
-                #Account type/tipo de conta 제거
+                #Account type/tipo de conta remove
                 headers = list(df.columns.values)
                 for header in headers:
                     if "account type" in header.lower() or "tipo de conta" in header.lower():
                         df.drop(header, axis=1, inplace=True)
 
-                #제품명 제거
+                #Remove material description --- Will add using Lookupvalue in Power BI
                 for index, row in df.iterrows():
                     if isinstance(row.iloc[2], str) and row.iloc[2] in ["Order", "Pedido"]:
                         df.iat[index, 5] = ""
                     else:
                         pass
 
-                #날짜 변경
+                #Change Date format
                 for index, row in df.iterrows():
                     if isinstance(row.iloc[0], str):
                         date_obj = dateparser.parse(row.iloc[0])
@@ -45,7 +45,7 @@ for files in os.listdir(csv_path):
                             new_date_str = date_obj.strftime("%Y-%m-%d")
                             df.iat[index, 0] = new_date_str
 
-                #SIS SKU 변경
+                #SIS SKU change
                 for index, row in df.iterrows():
                     if isinstance(row.iloc[4], str):
                         match1 = re.search(r'\b.*([A-Za-z]{3}\d{5}).*\b', row.iloc[4])
@@ -66,7 +66,7 @@ for files in os.listdir(csv_path):
                                 new_value = new_value.replace(substring, "")
                             df.iat[index, 4] = new_value
 
-                #필요 없는 컬럼 제거
+                #Remove unneccessary columns
                 if '_BR_' in files:
                     try:
                         df = df.drop(df.index[:5])
